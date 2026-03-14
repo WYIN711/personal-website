@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>William Yin — Thinker & Builder</title>
-<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Lora:ital,wght@0,400;0,500;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -91,22 +91,27 @@
   }
 
   .identity .bio {
-    font-weight: 300;
-    font-size: 0.95rem;
-    line-height: 1.8;
-    color: #777;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+    line-height: 1.85;
+    color: #666;
   }
 
-  .left-footer {
-    font-size: 0.7rem;
-    color: #c0b8b0;
-    letter-spacing: 0.1em;
+  .site-footer {
+    position: relative;
+    z-index: 1;
+    padding: 40px 56px;
+    border-top: 1px solid rgba(200, 195, 188, 0.15);
     display: flex;
     align-items: center;
     gap: 16px;
+    font-size: 0.7rem;
+    color: #c0b8b0;
+    letter-spacing: 0.1em;
   }
 
-  .left-footer a {
+  .site-footer a {
     color: #b0a8a0;
     text-decoration: none;
     transition: color 0.3s ease;
@@ -115,11 +120,11 @@
     gap: 5px;
   }
 
-  .left-footer a:hover {
+  .site-footer a:hover {
     color: #8a7e74;
   }
 
-  .left-footer a svg {
+  .site-footer a svg {
     width: 14px;
     height: 14px;
   }
@@ -276,16 +281,6 @@
           I build things to explore these questions, and to make the experience of being alive in this strange new era a little more beautiful.
         </p>
       </div>
-      <div class="left-footer">
-        <span>&copy; 2026</span>
-        <div class="footer-sep"></div>
-        <a href="https://x.com/wyin711" target="_blank">
-          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-          </svg>
-          @wyin711
-        </a>
-      </div>
     </div>
 
     <div class="right-col">
@@ -386,5 +381,15 @@ c0 -421 3 -562 12 -571 15 -15 1224 -17 1248 -2 12 7 14 87 11 571 -1 309 -5
       </a>
     </div>
   </div>
+  <footer class="site-footer">
+    <span>&copy; 2026 William Yin</span>
+    <div class="footer-sep"></div>
+    <a href="https://x.com/wyin711" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+      </svg>
+      @wyin711
+    </a>
+  </footer>
 </body>
 </html>
