@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>William Yin — Thinker & Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #333;
+    background: #fdfcfa;
+    min-height: 100vh;
+  }
+
+  /* Marble veining effect */
+  .veins {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .veins::before {
+    content: '';
+    position: absolute;
+    top: -20%; left: -10%;
+    width: 120%; height: 140%;
+    background:
+      linear-gradient(142deg, transparent 48%, rgba(195, 188, 178, 0.06) 48.2%, rgba(195, 188, 178, 0.06) 48.4%, transparent 48.6%),
+      linear-gradient(198deg, transparent 52%, rgba(205, 198, 188, 0.04) 52.2%, rgba(205, 198, 188, 0.04) 52.4%, transparent 52.6%),
+      linear-gradient(165deg, transparent 35%, rgba(200, 193, 183, 0.05) 35.2%, rgba(200, 193, 183, 0.05) 35.4%, transparent 35.6%),
+      radial-gradient(ellipse at 25% 25%, rgba(215, 210, 203, 0.08) 0%, transparent 45%),
+      radial-gradient(ellipse at 75% 75%, rgba(210, 205, 198, 0.06) 0%, transparent 40%);
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* Left column - identity */
+  .left-col {
+    width: 460px;
+    flex-shrink: 0;
+    padding: 80px 56px;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+
+  .identity {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .identity h1 {
+    font-family: 'Italiana', serif;
+    font-weight: 400;
+    font-size: 3.5rem;
+    line-height: 1.15;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+    letter-spacing: 0.01em;
+  }
+
+  .identity .tagline {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1rem;
+    color: #a09888;
+    margin-bottom: 40px;
+  }
+
+  .marble-line {
+    width: 48px;
+    height: 2px;
+    background: linear-gradient(90deg, #c8c0b8, #e0d8d0);
+    margin-bottom: 32px;
+    border-radius: 1px;
+  }
+
+  .identity .bio {
+    font-weight: 300;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #777;
+  }
+
+  .left-footer {
+    font-size: 0.7rem;
+    color: #c0b8b0;
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .left-footer a {
+    color: #b0a8a0;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .left-footer a:hover {
+    color: #8a7e74;
+  }
+
+  .left-footer a svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .footer-sep {
+    width: 1px;
+    height: 12px;
+    background: rgba(200, 195, 188, 0.3);
+  }
+
+  /* Right column - projects */
+  .right-col {
+    flex: 1;
+    padding: 80px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+    border-left: 1px solid rgba(200, 195, 188, 0.15);
+  }
+
+  .right-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #c0b8b0;
+    margin-bottom: 8px;
+  }
+
+  .project-tile {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: 40px 36px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.6), rgba(248,246,242,0.8));
+    border: 1px solid rgba(210, 205, 198, 0.25);
+    border-radius: 20px;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-tile::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, transparent 60%, rgba(200, 195, 188, 0.06) 100%);
+    transition: opacity 0.5s ease;
+  }
+
+  .project-tile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.04);
+    border-color: rgba(200, 195, 188, 0.4);
+  }
+
+  .tile-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .tile-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(210, 205, 198, 0.3);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .tile-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .tile-icon img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+  }
+
+  .tile-name {
+    font-family: 'Italiana', serif;
+    font-size: 1.4rem;
+    color: #2a2a2a;
+  }
+
+  .tile-desc {
+    font-weight: 300;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #888;
+    position: relative;
+    z-index: 1;
+  }
+
+  .tile-url {
+    display: inline-block;
+    margin-top: 16px;
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 0.8rem;
+    color: #b8b0a8;
+    position: relative;
+    z-index: 1;
+    transition: color 0.3s ease;
+  }
+
+  .project-tile:hover .tile-url {
+    color: #8a7e74;
+  }
+
+  @media (max-width: 840px) {
+    .page { flex-direction: column; }
+    .left-col {
+      width: 100%;
+      position: relative;
+      height: auto;
+      padding: 60px 32px 40px;
+    }
+    .right-col {
+      border-left: none;
+      border-top: 1px solid rgba(200, 195, 188, 0.15);
+      padding: 40px 32px 80px;
+    }
+    .identity h1 { font-size: 2.8rem; }
+  }
+</style>
+</head>
+<body>
+  <div class="veins"></div>
+  <div class="page">
+    <div class="left-col">
+      <div class="identity">
+        <h1>William<br>Yin</h1>
+        <p class="tagline">Thinker & Builder</p>
+        <div class="marble-line"></div>
+        <p class="bio">
+          I spent years as an investor but my deeper passions have always lived in philosophy and literature: what it means to be human, and how we relate to one another.
+        </p>
+        <p class="bio" style="margin-top: 16px;">
+          The arrival of AI has sharpened these questions. As the boundary between human and machine shifts, I find myself drawn not to the technology itself, but to what it reveals — about our relationship with ourselves, and with each other.
+        </p>
+        <p class="bio" style="margin-top: 16px;">
+          I build things to explore these questions, and to make the experience of being alive in this strange new era a little more beautiful.
+        </p>
+      </div>
+      <div class="left-footer">
+        <span>&copy; 2026</span>
+        <div class="footer-sep"></div>
+        <a href="https://x.com/wyin711" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+          @wyin711
+        </a>
+      </div>
+    </div>
+
+    <div class="right-col">
+      <p class="right-label">Projects</p>
+
+      <a href="https://binky-ai.com/" target="_blank" class="project-tile">
+        <div class="tile-header">
+          <div class="tile-icon">
+            <!-- Binky AI logo -->
+            <svg viewBox="0 0 2364 2364" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g transform="translate(0,385)">
+                <g transform="translate(0,1594) scale(0.1,-0.1)" fill="#1A1035" stroke="none">
+                  <path d="M9355 14794 c-839 -42 -1366 -137 -1860 -336 -515 -207 -819 -473
+-881 -768 -75 -358 162 -838 692 -1402 162 -172 178 -205 123 -257 -33 -30
+-70 -32 -318 -16 -1453 93 -2942 -12 -4206 -296 -1187 -268 -1880 -722 -1979
+-1298 -68 -401 93 -806 551 -1384 1083 -1365 2844 -2321 4910 -2666 564 -94
+883 -125 1463 -141 206 -6 383 -13 393 -16 30 -10 19 -42 -27 -73 -44 -31
+-412 -193 -751 -331 -350 -142 -685 -302 -768 -365 -76 -58 -77 -64 -77 -384
+l0 -281 -29 -32 -29 -33 -639 0 -638 0 -5 633 c-5 613 -6 634 -24 648 -22 16
+-235 19 -986 15 -381 -2 -417 -4 -440 -20 l-25 -18 -6 -294 c-3 -162 -7 -464
+-8 -671 l-1 -378 -610 0 -611 0 -24 -25 -25 -24 0 -561 0 -560 -704 0 -705 0
+-28 -24 -28 -24 -3 -680 c-2 -656 -2 -680 17 -703 l19 -23 716 3 716 3 0 -559
+c0 -421 3 -562 12 -571 15 -15 1224 -17 1248 -2 12 7 14 87 11 571 -1 309 -5
+568 -8 576 -4 11 -115 13 -619 13 l-614 0 0 663 c0 364 -3 672 -6 685 l-6 22
+625 0 c561 0 625 2 631 16 3 9 6 274 6 590 l0 574 693 0 692 0 -3 -487 c-3
+-543 0 -518 -73 -555 -31 -16 -80 -18 -579 -18 -620 0 -598 3 -620 -79 -17
+-64 -9 -1430 9 -1456 36 -53 209 -163 395 -251 168 -80 212 -60 471 214 609
+643 1373 1358 1955 1827 954 770 1784 1323 2890 1927 455 249 729 390 1505
+780 720 361 1187 598 1315 668 521 284 729 413 1050 651 308 227 610 532 610
+614 0 32 -31 55 -73 55 -41 0 -113 -30 -452 -190 -261 -122 -333 -154 -562
+-244 -386 -153 -716 -269 -993 -350 -47 -13 -137 -40 -200 -59 -814 -246
+-1668 -407 -2480 -467 -353 -26 -1121 -29 -1377 -6 -32 3 -114 11 -183 17
+-1276 111 -2699 600 -3695 1270 -687 462 -1186 1007 -1290 1409 -26 99 -17
+299 18 401 125 366 479 551 1393 724 561 106 992 145 1693 152 1303 14 2333
+-139 3371 -498 254 -88 359 -131 785 -320 66 -29 318 -152 560 -274 489 -246
+604 -299 910 -422 766 -307 1422 -443 2146 -443 771 0 1532 191 1423 357 -24
+38 -68 50 -204 57 -759 41 -1295 127 -1875 302 -1087 327 -2070 829 -3120
+1592 -721 525 -1370 1146 -1607 1537 -201 333 -24 655 460 838 1110 421 3091
+137 4767 -683 354 -174 581 -301 850 -479 550 -362 974 -727 1312 -1132 218
+-261 338 -305 648 -233 746 172 1257 242 1900 260 1427 39 2720 -377 3512
+-1131 370 -351 563 -701 594 -1075 69 -831 -491 -1937 -1376 -2714 -1018 -895
+-2377 -1440 -4340 -1742 -188 -28 -234 -39 -283 -61 -64 -30 -82 -117 -36
+-172 33 -39 68 -48 239 -56 1018 -47 2012 -304 2875 -741 778 -394 1038 -696
+965 -1120 -35 -198 -145 -320 -332 -369 -115 -30 -253 -12 -488 65 -82 27
+-211 67 -285 89 -74 21 -218 64 -320 94 -360 107 -567 166 -725 207 -88 23
+-191 51 -230 61 -887 240 -2127 428 -3330 506 -344 22 -1456 25 -1835 5 -1092
+-59 -2108 -193 -3070 -406 -1170 -259 -2109 -569 -3265 -1079 -345 -151 -954
+-470 -1305 -681 -443 -268 -559 -382 -568 -561 -7 -134 60 -228 193 -269 117
+-37 208 -15 566 140 990 426 2029 800 2834 1019 1651 449 3238 720 4710 805
+518 30 1520 30 1990 1 1057 -67 1821 -171 2760 -377 267 -59 758 -179 890
+-219 114 -34 661 -182 780 -211 503 -122 885 -100 1226 72 414 207 681 571
+760 1034 28 164 23 468 -10 621 -146 672 -669 1256 -1376 1534 -66 26 -122 49
+-124 52 -11 9 30 33 97 57 316 112 875 401 1172 605 672 462 1201 1031 1592
+1716 384 672 603 1488 559 2085 -46 617 -250 1022 -785 1555 -1115 1112 -2713
+1609 -4596 1429 -448 -42 -794 -107 -1285 -241 -289 -78 -338 -69 -513 99
+-251 241 -307 291 -492 440 -594 475 -1244 862 -2058 1224 -79 35 -145 64
+-147 64 -2 0 -93 38 -203 84 -829 350 -1973 639 -2867 725 -275 27 -759 45
+-950 35z M19365 10244 c-224 -43 -434 -231 -510 -455 -110 -323 3 -642 295
+-832 532 -346 1218 167 1055 788 -93 355 -461 573 -840 499z"/>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <h2 class="tile-name">Binky AI</h2>
+        </div>
+        <p class="tile-desc">AI-powered personal feeds engine.</p>
+        <span class="tile-url">binky-ai.com →</span>
+      </a>
+
+      <a href="https://code-cast.dev/" target="_blank" class="project-tile">
+        <div class="tile-header">
+          <div class="tile-icon">
+            <!-- CodeCast logo -->
+            <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="56" height="56" rx="12" fill="#1c1c1a"/>
+              <path d="M24 17 L14 28 L24 39" stroke="#f5f5f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <path d="M31 23 C34 25, 34 31, 31 33" stroke="#f5f5f0" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.8"/>
+              <path d="M35.5 19.5 C40 22.5, 40 33.5, 35.5 36.5" stroke="#f5f5f0" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/>
+              <path d="M40 16 C46 20.5, 46 35.5, 40 40" stroke="#f5f5f0" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.25"/>
+            </svg>
+          </div>
+          <h2 class="tile-name">CodeCast</h2>
+        </div>
+        <p class="tile-desc">Transform AI coding sessions into clean, shareable web pages for collaboration and portfolios.</p>
+        <span class="tile-url">code-cast.dev →</span>
+      </a>
+
+      <a href="https://www.war-victims.info/" target="_blank" class="project-tile">
+        <div class="tile-header">
+          <div class="tile-icon">
+            <!-- War Victims Memorial logo -->
+            <img src="https://www.war-victims.info/favicon.png" alt="War Victims Memorial">
+          </div>
+          <h2 class="tile-name">War Victims Memorial</h2>
+        </div>
+        <p class="tile-desc">A memorial documenting individual names of people lost in conflicts — every name remembered.</p>
+        <span class="tile-url">war-victims.info →</span>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
